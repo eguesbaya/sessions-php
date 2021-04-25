@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,9 +37,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Chocolates chips</a></li>
-                    <li><a href="#">Nuts</a></li>
+                    <?php if (isset($_SESSION['loginname'])) : ?>
+                        <li><a href="/chocolatechip.php">Chocolates chips</a></li>
+                    <?php else: ?>
+                        <li><a href="#">Chocolates chips</a></li>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['loginname'])) : ?>
+                        <li><a href="/nuts.php">Nuts</a></li>
+                    <?php else: ?>
+                        <li><a href="#">Nuts</a></li>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['loginname'])) : ?>
+                        <li><a href="/glutenfull.php">Gluten full</a></li>
+                    <?php else: ?>
                     <li><a href="#">Gluten full</a></li>
+                    <?php endif; ?>
                     <li>
                         <a href="/cart.php" class="btn btn-warning navbar-btn">
                             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
@@ -47,7 +62,16 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+
+
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+        <?php if (isset($_SESSION['loginname'])) : ?>
+            <strong> Hello <?= $_SESSION['loginname'] ?> !
+            <a href="logout.php"> Log out </a>
+        <?php else: ?>
+            <strong>Hello Wilder !</strong>
+            <a href="login.php"> Login </a>
+        <?php endif; ?>
     </div>
 </header>
