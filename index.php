@@ -18,10 +18,12 @@
         <?php }
 
 if (isset($_GET['add_to_cart'])) {
-    $_SESSION['id'] = $_GET['add_to_cart'];
+    if(isset($_SESSION['box'][$_GET['add_to_cart']])) {
+        $_SESSION['box'][$_GET['add_to_cart']]++;
+    } else {
+        $_SESSION['box'][$_GET['add_to_cart']] = 1;
+    }
 }
-
-var_dump($_SESSION);
 
 
  ?>
